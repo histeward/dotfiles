@@ -42,6 +42,7 @@ set autoindent          " copy indent from current line when starting a new line
 set smartindent
 set smarttab
 set expandtab
+set number
 set relativenumber
 set viminfo='25,\"50,n~/.viminfo
 set complete+=kspell
