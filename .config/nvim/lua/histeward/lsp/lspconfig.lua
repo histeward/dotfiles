@@ -66,6 +66,8 @@ require 'lspconfig'.pyright.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = lsp_flags,
+    filetypes = { "python" },
+    single_file_support = true,
     settings = {
         python = {
             analysis = {

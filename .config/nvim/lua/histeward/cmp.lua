@@ -101,20 +101,27 @@ cmp.setup {
             vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             vim_item.menu = ({
+                buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
-                nvim_lua = "[NVIM_LUA]",
-                luasnip = "[Snippet]",
-                bufferer = "[Buffer]",
+                nvim_lua = "[api]",
                 path = "[Path]",
+                luasnip = "[Snip]",
+                gh_issues = "[issues]"
             })[entry.source.name]
             return vim_item
         end,
     },
+    -- the ORDER of your sources do MATTER (by default). It dictates the priority
+    -- other things you can configure:
+    --  keyword_length = 5
+    --  max_item_count = 10
+    --  priority = ooohhh. . . . . I dunno . . .👇
     sources = {
-        { name = "nvim_lsp" },
+        { name = "gh_issues" },
+        { name = "nvim_lsp", max_item_count = 10 },
         { name = "nvim_lua" },
         { name = "luasnip" },
-        { name = "buffer" },
+        { name = "buffer", keyword_length = 5 },
         { name = "path" },
     },
     confirm_opts = {
@@ -122,12 +129,15 @@ cmp.setup {
         select = false,
     },
     window = {
+        completion    = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        },
         documentation = {
             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        }
+        },
     },
     experimental = {
-        ghost_text = false,
+        ghost_text = true,
         native_menu = false,
     },
 }

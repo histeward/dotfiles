@@ -6,10 +6,13 @@ local api = vim.api
 
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]] -- hopefully formats the document on save (I just passed it in here lol")
 
-local group = api.nvim_create_augroup("GetRidOfMultiInstanceLsoServers", { clear = true })
-api.nvim_create_autocmd("BufRead", { command = ":lua vim.lsp.stop_client(vim.lsp.get_active_clients())", group = group })
-api.nvim_create_autocmd("BufRead", { command = ":LspRestart", group = group })
-api.nvim_create_autocmd("BufRead", { command = "LspStart", group = group })
+
+
+--local group = api.nvim_create_augroup("GetRidOfMultiInstanceLsoServers", { clear = true })
+--api.nvim_create_autocmd("BufRead",
+--    { command = ":lua vim.lsp.stop_client(vim.lsp.get_active_clients())", group = group, pattern = '*,' })
+--api.nvim_create_autocmd("BufRead", { command = ":LspRestart", group = group, pattern = '*', })
+--api.nvim_create_autocmd("BufRead", { command = "LspStart", group = group, pattern = '*', })
 
 -- TODO: figure out how to stop multi instances of lua to spawn after sourcing the file
 -- mostly happens when sourcing the file

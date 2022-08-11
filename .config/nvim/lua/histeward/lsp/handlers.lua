@@ -43,22 +43,23 @@ M.setup = function()
         border = "rounded",
     })
 end
-
-local function lsp_highlight_document(client)
-    -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec(
-            [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]]       ,
-            false
-        )
-    end
-end
+-- BUG: this down down here gives me this error when i start an lsp
+-- 👇 it gives me this error 👉 method textDocument/documentHighlight is not supported by any of the servers registered for the current buffer
+--local function lsp_highlight_document(client)
+--    -- Set autocommands conditional on server_capabilities
+--    if client.resolved_capabilities.document_highlight then
+--        vim.api.nvim_exec(
+--            [[
+--      augroup lsp_document_highlight
+--        autocmd! * <buffer>
+--        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+--        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+--      augroup END
+--    ]]       ,
+--            false
+--        )
+--    end
+--end
 
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
@@ -83,8 +84,21 @@ M.on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
     end
     lsp_keymaps(bufnr)
-    lsp_highlight_document(client)
+    --lsp_highlight_document(client)
+    --
+    -- 👇 This snippet i found on github is supposed to fix that BUG though i did not figure out how to implement it yet because I'm a dummy
+    -- so I turned it off
+    -- local cap = client.resolved_capabilities
+    -- -- Only highlight if compatible with the language
+    -- if cap.document_highlight then
+    --     vim.cmd('augroup LspHighlight')
+    --     vim.cmd('autocmd!')
+    --     vim.cmd('autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()')
+    --     vim.cmd('autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()')
+    --     vim.cmd('augroup END')
+    -- end
 end
+
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 

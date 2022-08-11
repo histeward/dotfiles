@@ -42,7 +42,6 @@ vim.opt.updatetime = 50
 vim.opt.scrolloff = 8
 vim.wo.signcolumn = "yes"
 
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]] -- hopefully formats the document on save (I just passed it in here lol")
 
 --vim.opt.cursorline = true
 
@@ -54,3 +53,11 @@ vim.g.mapleader = " "
 
 
 --require('lualine').setup()
+local win = require('lspconfig.ui.windows')
+local _default_opts = win.default_opts
+
+win.default_opts = function(options)
+    local opts = _default_opts(options)
+    opts.border = 'rounded'
+    return opts
+end
