@@ -43,8 +43,9 @@ M.setup = function()
         border = "rounded",
     })
 end
--- BUG: this down down here gives me this error when i start an lsp
+-- BUG: this down here gives me this error when i start an lsp
 -- 👇 it gives me this error 👉 method textDocument/documentHighlight is not supported by any of the servers registered for the current buffer
+
 --local function lsp_highlight_document(client)
 --    -- Set autocommands conditional on server_capabilities
 --    if client.resolved_capabilities.document_highlight then
@@ -76,7 +77,7 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" }) <CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+    -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
 M.on_attach = function(client, bufnr)
@@ -101,6 +102,7 @@ end
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then

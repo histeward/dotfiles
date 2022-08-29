@@ -10,6 +10,7 @@ require("histeward.treesitter") -- got this file somewhere does what most want f
 require("histeward.lsp") -- redirects to LSP directory where all configs are for LSP
 require("histeward.blankline") -- config for indent vertical lines
 require("histeward.lualine")
+require("histeward.toggleterm")
 
 -- TODO: set things up
 -- set up lsp and config very important and this is a headache cuz im a dummy

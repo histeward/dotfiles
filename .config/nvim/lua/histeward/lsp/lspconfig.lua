@@ -1,4 +1,4 @@
--- WARNING:if Multiple instances of sumneko_lua server occurs after sourcing the file :so %
+-- WARNING:if Multiple instances of sumneko_lua server occurs after sourcing the file :so %lspconf
 -- execute vim command -->  :lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 local status_ok, _ = pcall(require, "lspconfig")
@@ -39,6 +39,7 @@ require('lspconfig').html.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = lsp_flags,
+    cmd = { "vscode-html-language-server", "--stdio" },
     filetypes = { "html", "htmldjango" },
     opts = {
         settings = {

@@ -32,3 +32,64 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
+
+local change_set_group = vim.api.nvim_create_augroup('SetTabstopShiftWidth', { clear = true })
+
+api.nvim_create_autocmd("FileType", {
+    pattern = "html",
+    group = change_set_group,
+    callback = function()
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 2
+    end
+})
+
+-- 👇 chunk of code below not neccesary anymore I hope
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "htmldjango",
+--     callback = function()
+--         vim.opt_local.shiftwidth = 2
+--         vim.opt_local.tabstop = 2
+--     end
+-- })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "css",
+    group = change_set_group,
+    callback = function()
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 2
+    end
+})
+
+local change_filetype_group = api.nvim_create_augroup('ChangeFiletype', { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "htmldjango",
+    group = change_filetype_group,
+    callback = function()
+        vim.opt_local.filetype = "html"
+    end
+})
+
+local set_textwidth_group = api.nvim_create_augroup('SetTextWidth', { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    group = set_textwidth_group,
+    callback = function()
+        vim.opt.wrap = true
+        vim.opt.linebreak = true
+        vim.opt.textwidth = 80
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "html",
+    group = set_textwidth_group,
+    callback = function()
+        vim.opt.wrap = true
+        vim.opt.linebreak = true
+        vim.opt.textwidth = 80
+    end
+})
+
+-- hopefully this will turn off trailing_slash

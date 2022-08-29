@@ -27,10 +27,12 @@ vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
-vim.opt.fileformat = "unix"
-vim.opt.encoding = "utf-8"
-vim.opt.fileencoding = "utf-8"
+--vim.opt.fileformat = "unix"
+--vim.opt.encoding = "utf-8"
+--vim.opt.fileencoding = "utf-8"
 
+-- not wrapping words halfway (useful for git commmit since it somehow wraps it)
+vim.opt.linebreak = true
 
 -- Give more space for displaying messages.
 vim.opt.cmdheight = 1
@@ -43,10 +45,22 @@ vim.opt.scrolloff = 8
 vim.wo.signcolumn = "yes"
 
 
---vim.opt.cursorline = true
 
---vim.opt.cursorlineopt = "number"
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = '*',
+    callback = function()
+        vim.cmd [[highlight CursorLineNr guifg=#fe8019 gui=nocombine]]
+        vim.opt.cursorline = true
+        vim.opt.cursorlineopt = "number"
+    end
+})
 
+vim.opt.listchars = {
+    tab = '│·',
+    extends = '⟩',
+    precedes = '⟨',
+    trail = ' '
+}
 --vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "

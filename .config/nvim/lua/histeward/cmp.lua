@@ -106,7 +106,6 @@ cmp.setup {
                 nvim_lua = "[api]",
                 path = "[Path]",
                 luasnip = "[Snip]",
-                gh_issues = "[issues]"
             })[entry.source.name]
             return vim_item
         end,
@@ -117,11 +116,10 @@ cmp.setup {
     --  max_item_count = 10
     --  priority = ooohhh. . . . . I dunno . . .👇
     sources = {
-        { name = "gh_issues" },
         { name = "nvim_lsp", max_item_count = 10 },
-        { name = "nvim_lua" },
         { name = "luasnip" },
-        { name = "buffer", keyword_length = 5 },
+        { name = "nvim_lua" },
+        { name = "buffer" },
         { name = "path" },
     },
     confirm_opts = {
@@ -137,7 +135,7 @@ cmp.setup {
         },
     },
     experimental = {
-        ghost_text = true,
+        ghost_text = false,
         native_menu = false,
     },
 }

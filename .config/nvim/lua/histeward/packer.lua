@@ -30,34 +30,35 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
 
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim' -- Packer package manager
+    use('wbthomason/packer.nvim') -- Packer package manager
 
     -- colour scheme
-    use 'folke/tokyonight.nvim' -- Color theme
+    use('folke/tokyonight.nvim') -- Color theme
+    --use 'shaunsingh/nord.nvim' -- Color theme
 
     use { 'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
     -- autopairs
-    use 'windwp/nvim-autopairs' -- Auto pair brackets
-    use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim this was required by some other plugin in here that i do not remember what
-    use "nvim-lua/plenary.nvim" -- Useful lua functions don't remember what it does again though something works 
+    use('windwp/nvim-autopairs') -- Auto pair brackets
+    use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim this was required by some other plugin in here that i do not remember what
+    use("nvim-lua/plenary.nvim") -- Useful lua functions don't remember what it does again though something works
 
     -- LSP
-    use "neovim/nvim-lspconfig" -- Configurations for Nvim LSP
+    use("neovim/nvim-lspconfig") -- Configurations for Nvim LSP
 
     --treesitter
     use("nvim-treesitter/nvim-treesitter", {
         run = ":TSUpdate"
     })
     -- cmp plugins
-    use "hrsh7th/nvim-cmp" -- The completion plugin
-    use "hrsh7th/cmp-buffer" -- buffer completions
-    use "hrsh7th/cmp-path" -- path completions
-    use "hrsh7th/cmp-cmdline" -- cmdline completions
-    use "hrsh7th/cmp-nvim-lsp" -- lsp completion
-    use "hrsh7th/cmp-nvim-lua" -- completion for lua (helpful when configuring neovim lua)
-    use "saadparwaiz1/cmp_luasnip" -- snippet completions
+    use("hrsh7th/nvim-cmp") -- The completion plugin
+    use("hrsh7th/cmp-buffer") -- buffer completions
+    use("hrsh7th/cmp-path") -- path completions
+    use("hrsh7th/cmp-cmdline") -- cmdline completions
+    use("hrsh7th/cmp-nvim-lsp") -- lsp completion
+    use("hrsh7th/cmp-nvim-lua") -- completion for lua (helpful when configuring neovim lua)
+    use("saadparwaiz1/cmp_luasnip") -- snippet completions
 
     -- snippets
     use "L3MON4D3/LuaSnip" --snippet engine
@@ -67,7 +68,6 @@ return require('packer').startup(function(use)
     use "nvim-telescope/telescope.nvim" -- super coustomizable fuzzy finder plugin
     use 'nvim-telescope/telescope-media-files.nvim' -- can display media files in telescope viewer
 
-    -- vertical line highlight
     -- use "lukas-reineke/indent-blankline.nvim"
     use({
         "lukas-reineke/indent-blankline.nvim",
@@ -76,4 +76,12 @@ return require('packer').startup(function(use)
             require("histeward.blankline")
         end,
     })
+
+    -- toggle term terminal which is pretty nice
+    use "akinsho/toggleterm.nvim"
+
+    -- live markdown preview
+    -- install without yarn or npm
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 end)
