@@ -8,8 +8,7 @@ having to use the mouse is the best feature of vim.
 
 ### Screenshot
 
-![terminal with multiple panes displaying my neovim
-setup](../dotfiles/src/img/nvim_setup.png "setup") 
+![terminal with multiple panes displaying my neovim setup](../dotfiles/src/img/nvim_setup.png "setup") 
 
 
 **What this neovim config can do**
